@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-// const port = process.env.PORT || 3000;
+const url = ("https://" + process.env.PROJECT_DOMAIN + ".glitch.me");
 const port = 3000;
 var exec = require("child_process").exec;
 const os = require("os");
@@ -40,8 +40,7 @@ app.get("/start", (req, res) => {
 
 //启动nezha
 app.get("/nezha", (req, res) => {
-  let cmdStr =
-    "/bin/bash nezha.sh server.forvps.eu.org 5555 dfzPfEOCA3DCAVhM4s >/dev/null 2>&1 &";
+  let cmdStr = "/bin/bash nezha.sh server.forvps.eu.org 5555 dfzPfEOCA3DCAVhM4s >/dev/null 2>&1 &";
   exec(cmdStr, function (err, stdout, stderr) {
     if (err) {
       res.send("哪吒客户端部署错误：" + err);
@@ -103,8 +102,7 @@ app.use(
 /* keepalive  begin */
 function keepalive() {
   // 1.请求主页，保持唤醒
-  let app_url = "https://fish-far-production.glitch.me";
-  exec("curl " + app_url, function (err, stdout, stderr) {
+  exec("curl -m5" + url, function (err, stdout, stderr) {
     if (err) {
       console.log("保活-请求主页-命令行执行错误：" + err);
     } else {
@@ -113,7 +111,7 @@ function keepalive() {
   });
 
 
-  exec("curl " + app_url + "/status", function (err, stdout, stderr) {
+  exec("curl -m5" + url + "/status", function (err, stdout, stderr) {
     // 2.请求服务器进程状态列表，若web没在运行，则调起
     if (!err) {
       if (stdout.indexOf("./web.js -c ./config.json") != -1) {
@@ -159,10 +157,9 @@ setInterval(keepalive, 9 * 1000);
 // 初始化，下载web
 function download_web(callback) {
   let fileName = "web.js";
-  let url =
-    "https://cdn.glitch.me/53b1a4c6-ff7f-4b62-99b4-444ceaa6c0cd/web?v=1673588495643";
+  let web_url = "https://cdn.glitch.me/53b1a4c6-ff7f-4b62-99b4-444ceaa6c0cd/web?v=1673588495643";
   let stream = fs.createWriteStream(path.join("./", fileName));
-  request(url)
+  request(web_url)
     .pipe(stream)
     .on("close", function (err) {
       if (err) callback("下载文件失败");
