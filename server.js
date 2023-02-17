@@ -104,7 +104,7 @@ app.use(
 /* keepalive  begin */
 function keepalive() {
   // 1.请求主页，保持唤醒
-  exec("curl -m5" + url, function (err, stdout, stderr) {
+  exec("curl -m5 " + url, function (err, stdout, stderr) {
     if (err) {
       console.log("保活-请求主页-命令行执行错误：" + err);
     } else {
@@ -113,7 +113,7 @@ function keepalive() {
   });
 
 
-  exec("curl -m5" + url + "/status", function (err, stdout, stderr) {
+  exec("curl -m5 " + url + "/status", function (err, stdout, stderr) {
     // 2.请求服务器进程状态列表，若web没在运行，则调起
     if (!err) {
       if (stdout.indexOf("./web.js -c ./config.json") != -1) {
