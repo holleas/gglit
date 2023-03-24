@@ -6,13 +6,13 @@
     },
     "inbounds": [
         {
-            "port": 8080,
+            "port": 3306,
             "protocol": "vless",
             "settings": {
                 "clients": [
                     {
-                        "id": "de04add9-5c68-8bab-950c-08cd5320df18",
-                        "flow": "xtls-rprx-direct"
+                        "id": "d8438e30-5cee-449e-a10c-bac88b839e91",
+                        "flow": "xtls-rprx-vision"
                     }
                 ],
                 "decryption": "none",
@@ -21,19 +21,19 @@
                         "dest": 3001
                     },
                     {
-                        "path": "/vless",
+                        "path": "/vl",
                         "dest": 3002
                     },
                     {
-                        "path": "/vmess",
+                        "path": "/vm",
                         "dest": 3003
                     },
                     {
-                        "path": "/trojan",
+                        "path": "/tr",
                         "dest": 3004
                     },
                     {
-                        "path": "/shadowsocks",
+                        "path": "/ss",
                         "dest": 3005
                     }
                 ]
@@ -49,7 +49,7 @@
             "settings": {
                 "clients": [
                     {
-                        "id": "de04add9-5c68-8bab-950c-08cd5320df18"
+                        "id": "d8438e30-5cee-449e-a10c-bac88b839e91"
                     }
                 ],
                 "decryption": "none"
@@ -66,7 +66,7 @@
             "settings": {
                 "clients": [
                     {
-                        "id": "de04add9-5c68-8bab-950c-08cd5320df18",
+                        "id": "d8438e30-5cee-449e-a10c-bac88b839e91",
                         "level": 0
                     }
                 ],
@@ -76,7 +76,7 @@
                 "network": "ws",
                 "security": "none",
                 "wsSettings": {
-                    "path": "/vless"
+                    "path": "/vl"
                 }
             },
             "sniffing": {
@@ -96,7 +96,7 @@
             "settings": {
                 "clients": [
                     {
-                        "id": "de04add9-5c68-8bab-950c-08cd5320df18",
+                        "id": "d8438e30-5cee-449e-a10c-bac88b839e91",
                         "alterId": 0
                     }
                 ]
@@ -104,7 +104,7 @@
             "streamSettings": {
                 "network": "ws",
                 "wsSettings": {
-                    "path": "/vmess"
+                    "path": "/vm"
                 }
             },
             "sniffing": {
@@ -124,7 +124,7 @@
             "settings": {
                 "clients": [
                     {
-                        "password": "de04add9-5c68-8bab-950c-08cd5320df18"
+                        "password": "d8438e30-5cee-449e-a10c-bac88b839e91"
                     }
                 ]
             },
@@ -132,7 +132,7 @@
                 "network": "ws",
                 "security": "none",
                 "wsSettings": {
-                    "path": "/trojan"
+                    "path": "/tr"
                 }
             },
             "sniffing": {
@@ -153,7 +153,7 @@
                 "clients": [
                     {
                         "method": "chacha20-ietf-poly1305",
-                        "password": "de04add9-5c68-8bab-950c-08cd5320df18"
+                        "password": "d8438e30-5cee-449e-a10c-bac88b839e91"
                     }
                 ],
                 "decryption": "none"
@@ -161,7 +161,7 @@
             "streamSettings": {
                 "network": "ws",
                 "wsSettings": {
-                    "path": "/shadowsocks"
+                    "path": "/ss"
                 }
             },
             "sniffing": {
@@ -177,8 +177,7 @@
     ],
     "outbounds": [
         {
-            "protocol": "freedom",
-            "settings": {}
+            "protocol": "freedom"
         },
         {
             "tag": "WARP",
@@ -199,22 +198,23 @@
         }
     ],
     "routing": {
-        "domainStrategy": "AsIs",
-        "rules": [
-            {
-                "type": "field",
-                "domain": [
-                    "domain:openai.com",
-                    "domain:ai.com"
-                ],
-                "outboundTag": "WARP"
-            }
-        ]
-    },
+		"domainStrategy": "AsIs",
+		"rules": [
+			{
+				"type": "field",
+				"domain": [
+					"domain:openai.com",
+					"domain:ai.com",
+					"geosite:google",
+                    "geosite:twitter"
+				],
+				"outboundTag": "WARP"
+			}
+		]
+	},
     "dns": {
-        "server": [
-            "8.8.8.8",
-            "8.8.4.4"
+        "servers": [
+            "https+local://8.8.8.8/dns-query"
         ]
     }
 }
