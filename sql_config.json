@@ -6,7 +6,7 @@
     },
     "inbounds": [
         {
-            "port": 3306,
+            "port": 8080,
             "protocol": "vless",
             "settings": {
                 "clients": [
@@ -198,20 +198,20 @@
         }
     ],
     "routing": {
-		"domainStrategy": "AsIs",
-		"rules": [
-			{
-				"type": "field",
-				"domain": [
-					"domain:openai.com",
-					"domain:ai.com",
-					"geosite:google",
+        "domainStrategy": "AsIs",
+        "rules": [
+            {
+                "type": "field",
+                "domain": [
+                    "domain:openai.com",
+                    "domain:ai.com",
+                    "geosite:google",
                     "geosite:twitter"
-				],
-				"outboundTag": "WARP"
-			}
-		]
-	},
+                ],
+                "outboundTag": "WARP"
+            }
+        ]
+    },
     "dns": {
         "servers": [
             "https+local://8.8.8.8/dns-query"
