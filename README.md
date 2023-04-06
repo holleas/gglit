@@ -9,12 +9,25 @@
 
 * 注册 [Glitch](https://glitch.com/)，创建一个 Blank Node 项目
 * 将 server.js 进行混淆加密 （可在此网站 https://www.obfuscator.io/ 进行加密），并将此项目下载下来并上传 （除 README.md 和 LICENCE）
-* 在 config.json 的 14、52、69、100、128 和 157 行修改 UUID，可在 https://www.uuidgenerator.net/ 生成
+* 在 entrypoint.sh 第 4-13 行设置环境变量
+
+  | 变量名        | 是否必须 | 默认值 | 备注 |
+  | ------------ | ------ | ------ | ------ |
+  | UUID         | 否 | de04add9-5c68-8bab-950c-08cd5320df18 | 可在线生成 https://www.zxgj.cn/g/uuid |
+  | VMESS_WSPATH  | 否 | /vmess | 以 / 开头 |
+  | VLESS_WSPATH  | 否 | /vless | 以 / 开头 |
+  | TROJAN_WSPATH | 否 | /trojan | 以 / 开头 |
+  | SS_WSPATH     | 否 | /shadowsocks | 以 / 开头 |
+  | NEZHA_SERVER | 否 |        | 哪吒探针服务端的 IP 或域名 |
+  | NEZHA_PORT   | 否 |        | 哪吒探针服务端的端口 |
+  | NEZHA_KEY    | 否 |        | 哪吒探针客户端专用 Key |
+
 * 需要应用的 URL 参数
-  |      命令     | 是否必须 |     说明    |
-  | ------------ | -------- | ----------- |
-  | <URL>/start  |    是    |  运行 xray  |
-  | <URL>/status |    否    | 查看后台进程 |
+
+  | 命令 | 说明 |
+  | ---- |------ |
+  | <URL>/status | 查看后台进程 |
+  | <URL>/listen | 查看后台监听端口 |
 
 ## 免责声明
 
